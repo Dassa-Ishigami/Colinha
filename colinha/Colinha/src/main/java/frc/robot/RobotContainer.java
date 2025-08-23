@@ -19,8 +19,8 @@ import frc.robot.commands.DriveTrainCommand;
  */
 public class RobotContainer {
   
-  final static CommandXboxController driverXbox = new CommandXboxController(0);
-  private static XboxController controller = new XboxController(0);
+  final static CommandXboxController driverXbox = new CommandXboxController(1);
+  final static XboxController controller = new XboxController(0);
   
   private final DriveTrainSubsystem subsystem = new DriveTrainSubsystem();
   
