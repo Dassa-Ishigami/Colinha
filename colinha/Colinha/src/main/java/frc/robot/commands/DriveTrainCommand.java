@@ -1,4 +1,3 @@
-
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
@@ -25,7 +24,7 @@ public class DriveTrainCommand extends Command {
   @Override
   public void execute() {
     double xSpeed = RobotContainer.getXboxController().getLeftY();
-    double zRotation = RobotContainer.getXboxController().getLeftY();
+    double zRotation = RobotContainer.getXboxController().getLeftX();
 
     tank.arcadeDrive(xSpeed, zRotation);
   }
@@ -40,5 +39,9 @@ public class DriveTrainCommand extends Command {
   @Override
   public boolean isFinished() {
     return false;
+  }
+}
+
+    
   }
 }
