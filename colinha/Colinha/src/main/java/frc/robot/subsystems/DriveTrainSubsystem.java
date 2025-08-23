@@ -12,7 +12,6 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.RobotContainer;
 
 public class DriveTrainSubsystem extends SubsystemBase {
  //Variáveis privadas dos controladores de motor
@@ -32,10 +31,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public DriveTrainSubsystem() {
 
-    frontLeft = new SparkMax(14, MotorType.kBrushless);
-    backLeft = new SparkMax(15, MotorType.kBrushless);
-    frontRight = new SparkMax(17, MotorType.kBrushless);
-    backRight = new SparkMax(16, MotorType.kBrushless);
+    frontLeft = new SparkMax(15, MotorType.kBrushed);
+    backLeft = new SparkMax(14, MotorType.kBrushed);
+    frontRight = new SparkMax(17, MotorType.kBrushed);
+    backRight = new SparkMax(16, MotorType.kBrushed);
 
     drive = new DifferentialDrive(frontLeft, frontRight);
     drive.setSafetyEnabled(false);
@@ -86,7 +85,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   public void arcadeDrive(double xSpeed, double zRotation) {
-    drive.arcadeDrive(xSpeed, zRotation);
+    drive.arcadeDrive(xSpeed, zRotation*-1);
   }
 
   
@@ -95,8 +94,9 @@ public class DriveTrainSubsystem extends SubsystemBase {
     frontRight.stopMotor();
   }
   
-  public void maxOutput(Class<Double> maxOutput) {
-    drive.setMaxOutput(RobotContainer.getXboxController().getLeftTriggerAxis());
+  public void maxOutput(double maxOutput) {
+    drive.setMaxOutput(maxOutput);
   }
+}
   
 }
