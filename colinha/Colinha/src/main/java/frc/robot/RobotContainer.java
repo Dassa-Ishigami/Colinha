@@ -22,14 +22,11 @@ public class RobotContainer {
   final static CommandXboxController driverXbox = new CommandXboxController(0);
   private static XboxController controller = new XboxController(0);
   
-  
   private final DriveTrainSubsystem subsystem = new DriveTrainSubsystem();
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
   
+  /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    
     subsystem.setDefaultCommand(new DriveTrainCommand(subsystem));
-
     configureBindings();
   }
 
@@ -44,18 +41,14 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-
     //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
   }
 
   public static XboxController getXboxController() {
     return controller;
   }
-
-
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
