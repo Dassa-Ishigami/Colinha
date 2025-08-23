@@ -4,7 +4,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -14,9 +16,10 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * this project, you must also update the Main.java file in the project.
  */
 public class Robot extends TimedRobot {
+  private static Robot   instance;
   private Command m_autonomousCommand;
 
-  private final RobotContainer m_robotContainer;
+  private RobotContainer m_robotContainer;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -25,7 +28,27 @@ public class Robot extends TimedRobot {
   public Robot() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
+    instance = this;
+  }
+
+    /**
+   * This function is run when the robot is first started up and should be used for any initialization code.
+   */
+  @Override
+  public void robotInit()
+  {
+    // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
+    // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+
+    // Create a timer to disable motor brake a few seconds after disable.  This will let the robot stop
+    // immediately when disabled, but then also let it be pushed more 
+    //disabledTimer = new Timer();
+
+    if (isSimulation())
+    {
+      DriverStation.silenceJoystickConnectionWarning(true);
+    }
   }
 
   /**
@@ -46,7 +69,9 @@ public class Robot extends TimedRobot {
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    //m_robotContainer.setMotorBrake(true);
+  }
 
   @Override
   public void disabledPeriodic() {}
@@ -75,6 +100,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    //m_robotContainer.setDriveMode();
   }
 
   /** This function is called periodically during operator control. */
